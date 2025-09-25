@@ -78,13 +78,6 @@ def depthFirstSearch(problem):
 
     Your search algorithm needs to return a list of actions that reaches the
     goal. Make sure to implement a graph search algorithm.
-
-    To get started, you might want to try some of these simple commands to
-    understand the search problem that is being passed in:
-
-    print "Start:", problem.getStartState()
-    print "Is the start a goal?", problem.isGoalState(problem.getStartState())
-    print "Start's successors:", problem.getSuccessors(problem.getStartState())
     """
     "*** YOUR CODE HERE ***"
     from game import Directions
@@ -102,7 +95,6 @@ def depthFirstSearch(problem):
         if problem.isGoalState(state):
             path = []
             while (state != problem.getStartState()):
-                print(state)
                 direct = trace[state][1]
                 if direct == 'West':
                     path.append(Directions.WEST)
@@ -115,6 +107,7 @@ def depthFirstSearch(problem):
                 state = trace[state][0]
 
             path.reverse()
+            print(path)
             return path
 
         if state in marked:
@@ -130,12 +123,7 @@ def depthFirstSearch(problem):
     return []
 
 def breadthFirstSearch(problem):
-    """
-    Search the shallowest nodes in the search tree first.
-    print "Start:", problem.getStartState()
-    print "Is the start a goal?", problem.isGoalState(problem.getStartState())
-    print "Start's successors:", problem.getSuccessors(problem.getStartState())
-    """
+    """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
     from game import Directions
     from util import Queue
@@ -163,6 +151,7 @@ def breadthFirstSearch(problem):
                 state = trace[state][0]
 
             path.reverse()
+            print(path)
             return path
 
         for next_state, direct, _ in problem.getSuccessors(state):

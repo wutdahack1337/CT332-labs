@@ -1,5 +1,8 @@
 Mã nguồn Pac-Man được phát triển bởi John DeNero và Dan Klein tại Đại học UC Berkeley cho lớp học CS188 – Trí tuệ nhân tạo
 
+# Prerequisite
+python 2.7
+
 # Play
 ```
 python2 pacman.py 
@@ -24,6 +27,11 @@ python2 pacman.py --layout tinyMaze --pacman SearchAgent -a fn=tinyMazeSearch
 python2 pacman.py --layout tinyMaze --pacman DumbAgent
 python2 pacman.py --layout tinyMaze --pacman RandomAgent
 python2 pacman.py --layout tinyMaze --pacman BetterRandomAgent
+
 python2 pacman.py --layout tinyMaze --pacman SearchAgent -a fn=dfs
 python2 pacman.py --layout tinyMaze --pacman SearchAgent -a fn=bfs
+python2 pacman.py --layout mediumMaze --pacman SearchAgent -a fn=dfs
+python2 pacman.py --layout mediumMaze --pacman SearchAgent -a fn=bfs
+python2 pacman.py --layout bigMaze --pacman SearchAgent -a fn=dfs
+python2 pacman.py --layout bigMaze --pacman SearchAgent -a fn=bfs
 ```
