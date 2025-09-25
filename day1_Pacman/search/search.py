@@ -87,12 +87,91 @@ def depthFirstSearch(problem):
     print "Start's successors:", problem.getSuccessors(problem.getStartState())
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    from game import Directions
+    from util import Stack
+
+    trace = {}
+    trace[problem.getStartState()] = (-1, -1)
+    marked = {}
+    s = Stack()
+    s.push(problem.getStartState())
+
+    while not s.isEmpty():
+        state = s.pop()
+       
+        if problem.isGoalState(state):
+            path = []
+            while (state != problem.getStartState()):
+                print(state)
+                direct = trace[state][1]
+                if direct == 'West':
+                    path.append(Directions.WEST)
+                elif direct == 'South':
+                    path.append(Directions.SOUTH)
+                elif direct == 'North':
+                    path.append(Directions.NORTH)
+                elif direct == 'East':
+                    path.append(Directions.EAST)
+                state = trace[state][0]
+
+            path.reverse()
+            return path
+
+        if state in marked:
+            continue
+        marked[state] = 1
+
+        for next_state, direct, _ in problem.getSuccessors(state):
+            if next_state in marked:
+                continue
+            trace[next_state] = [state, direct]
+            s.push(next_state)
+
+    return []
 
 def breadthFirstSearch(problem):
-    """Search the shallowest nodes in the search tree first."""
+    """
+    Search the shallowest nodes in the search tree first.
+    print "Start:", problem.getStartState()
+    print "Is the start a goal?", problem.isGoalState(problem.getStartState())
+    print "Start's successors:", problem.getSuccessors(problem.getStartState())
+    """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    from game import Directions
+    from util import Queue
+    
+    trace = {}
+    trace[problem.getStartState()] = (-1, -1)
+    q = Queue()
+    q.push(problem.getStartState())
+    
+    while not q.isEmpty():
+        state = q.pop()
+
+        if problem.isGoalState(state):
+            path = []
+            while (state != problem.getStartState()):
+                direct = trace[state][1]
+                if direct == 'West':
+                    path.append(Directions.WEST)
+                elif direct == 'South':
+                    path.append(Directions.SOUTH)
+                elif direct == 'North':
+                    path.append(Directions.NORTH)
+                elif direct == 'East':
+                    path.append(Directions.EAST)
+                state = trace[state][0]
+
+            path.reverse()
+            return path
+
+        for next_state, direct, _ in problem.getSuccessors(state):
+            if next_state in trace:
+                continue
+            trace[next_state] = [state, direct]
+            q.push(next_state)
+            
+    return []
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
