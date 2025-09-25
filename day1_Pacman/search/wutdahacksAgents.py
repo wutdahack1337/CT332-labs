@@ -11,7 +11,7 @@ class DumbAgent(Agent):
         "The agent always goes West"
 
         print "Location:", state.getPacmanPosition()
-        print "Actions availabel:", state.getLegalPacmanActions()
+        print "Actions available:", state.getLegalPacmanActions()
 
         if Directions.WEST in state.getLegalPacmanActions():
             print "Going West"
