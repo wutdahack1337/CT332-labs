@@ -29,9 +29,18 @@ python2 pacman.py --layout tinyMaze --pacman RandomAgent
 python2 pacman.py --layout tinyMaze --pacman BetterRandomAgent
 
 python2 pacman.py --layout tinyMaze --pacman SearchAgent -a fn=dfs
-python2 pacman.py --layout tinyMaze --pacman SearchAgent -a fn=bfs
 python2 pacman.py --layout mediumMaze --pacman SearchAgent -a fn=dfs
-python2 pacman.py --layout mediumMaze --pacman SearchAgent -a fn=bfs
 python2 pacman.py --layout bigMaze --pacman SearchAgent -a fn=dfs
+
+python2 pacman.py --layout tinyMaze --pacman SearchAgent -a fn=bfs
+python2 pacman.py --layout mediumMaze --pacman SearchAgent -a fn=bfs
 python2 pacman.py --layout bigMaze --pacman SearchAgent -a fn=bfs
+
+python2 pacman.py --layout tinyMaze --pacman SearchAgent -a fn=ucs
+python2 pacman.py --layout mediumMaze --pacman SearchAgent -a fn=ucs
+python2 pacman.py --layout bigMaze --pacman SearchAgent -a fn=ucs
+
+python2 pacman.py --layout tinyMaze --pacman SearchAgent -a fn=astar
+python2 pacman.py --layout mediumMaze --pacman SearchAgent -a fn=astar
+python2 pacman.py --layout bigMaze --pacman SearchAgent -a fn=astar
 ```

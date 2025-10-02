@@ -165,7 +165,46 @@ def breadthFirstSearch(problem):
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    from game import Directions
+    from util import PriorityQueue
+
+    trace = {}
+    trace[problem.getStartState()] = (-1, -1)
+    marked = {}
+    pq = PriorityQueue()
+    pq.push((problem.getStartState(), 0), 0)
+    while not pq.isEmpty():
+        state, costSoFar = pq.pop()
+        
+        if problem.isGoalState(state):
+            path = []
+            while (state != problem.getStartState()):
+                direct = trace[state][1]
+                if direct == 'West':
+                    path.append(Directions.WEST)
+                elif direct == 'South':
+                    path.append(Directions.SOUTH)
+                elif direct == 'North':
+                    path.append(Directions.NORTH)
+                elif direct == 'East':
+                    path.append(Directions.EAST)
+                state = trace[state][0]
+
+            path.reverse()
+            print(path)
+            return path
+        
+        if state in marked:
+            continue
+        marked[state] = 1
+
+        for next_state, direct, stepCost in problem.getSuccessors(state):
+            if next_state in marked:
+                continue
+            trace[next_state] = [state, direct]
+            pq.push((next_state, costSoFar + stepCost), costSoFar + stepCost)
+            
+    return []
 
 def nullHeuristic(state, problem=None):
     """
@@ -174,11 +213,64 @@ def nullHeuristic(state, problem=None):
     """
     return 0
 
-def aStarSearch(problem, heuristic=nullHeuristic):
+def manhattanHeuristic(state, goal):
+    import math
+    return math.abs(state[0] - goal[0]) + math.abs(state[1] - goal[1])
+
+
+
+def aStarSearch(problem, heuristic=manhattanHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    from game import Directions
+    from util import PriorityQueue
 
+    trace = {}
+    trace[problem.getStartState()] = (-1, -1)
+
+    g = {}
+    g[problem.getStartState()] = 0
+    f = {}
+    f[problem.getStartState()] = heuristic(problem.getStartState(), problem.goal)
+
+    pq = PriorityQueue()
+    pq.push((problem.getStartState()), 0) 
+
+    while not pq.isEmpty():
+        state = pq.pop()
+
+        if problem.isGoalState(state):
+            path = []
+            while (state != problem.getStartState()):
+                direct = trace[state][1]
+                if direct == 'West':
+                    path.append(Directions.WEST)
+                elif direct == 'South':
+                    path.append(Directions.SOUTH)
+                elif direct == 'North':
+                    path.append(Directions.NORTH)
+                elif direct == 'East':
+                    path.append(Directions.EAST)
+                state = trace[state][0]
+
+            path.reverse()
+            print(path)
+            return path
+
+        for next_state, direct, stepCost in problem.getSuccessors(state):
+            g_next_state_tmp = g[state] + stepCost
+
+            if next_state not in g:
+                g[next_state] = float('inf')
+                f[next_state] = float('inf')
+
+            if g_next_state_tmp < g[next_state]:
+                g[next_state] = g_next_state_tmp
+                f[next_state] = g[next_state] + heuristic(next_state, problem.goal)
+                trace[next_state] = [state, direct]
+                pq.push((next_state), f[next_state])
+
+    return []
 
 # Abbreviations
 bfs = breadthFirstSearch
