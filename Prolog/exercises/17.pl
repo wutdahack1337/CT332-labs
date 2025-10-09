@@ -9,6 +9,7 @@ solve(N, A, B, C) :-
 
 solve(N, A, B, C) :-
     N > 1,
-    solve(N-1, A, C, B),
+    NNew is N-1,
+    solve(NNew, A, C, B),
     solve(1, A, B, C),
-    solve(N-1, B, A, C).
+    solve(NNew, B, A, C).
