@@ -1,0 +1,1 @@
+gprolog --consult-file <file_name>.pl
