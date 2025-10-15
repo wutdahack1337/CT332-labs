@@ -1,2 +1,2 @@
-# CT332-labs
-AI labs
+# ai
+ai labs
