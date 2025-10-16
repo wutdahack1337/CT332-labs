@@ -96,9 +96,9 @@ solve(Tst, Qt, Tsp, Qp) :-
 
         % chuyen 1 quy 1 tu si từ bờ trái -> bờ phải
         (
-            Qt >= 1, Tsp >= 1, 
-            TspNew is Tsp-1, QpNew is Qp+1,
-            TstNew is Tst+1, QtNew is Qt-1,
+            Qt >= 1, Tst >= 1,
+            TstNew is Tst-1, QtNew is Qt-1,
+            TspNew is Tsp+1, QpNew is Qp+1,
             write((Tst, Qt, Tsp, Qp)), write(' -> '), write((TstNew, QtNew, TspNew, QpNew)), nl,
             solve(TstNew, QtNew, TspNew, QpNew)
         )
